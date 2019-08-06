@@ -13,7 +13,6 @@ export default function Task({
   }
 
   function renderClearButton() {
-    console.log(completedCount);
     return completedCount > 0 ? (
       <button className="clear-completed" onClick={onClearCompleted}>
         Clear completed
