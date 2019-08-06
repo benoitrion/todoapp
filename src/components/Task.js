@@ -54,7 +54,7 @@ export default function Task({
         <input
           className="toggle"
           type="checkbox"
-          checked={completed}
+          defaultChecked={completed}
           onClick={onToggle}
         />
         <label onDoubleClick={handleEdit}>{title}</label>

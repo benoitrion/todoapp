@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { ALL, ACTIVE, COMPLETED } from '../constants';
 
-export default function Task({
+export default function Footer({
   count,
   showing,
   completedCount,
@@ -32,13 +32,16 @@ export default function Task({
           </a>
         </li>{' '}
         <li>
-          <a href="#/" className={classNames({ selected: showing === ACTIVE })}>
+          <a
+            href="#/activated"
+            className={classNames({ selected: showing === ACTIVE })}
+          >
             Active
           </a>
         </li>{' '}
         <li>
           <a
-            href="#/"
+            href="#/completed"
             className={classNames({ selected: showing === COMPLETED })}
           >
             Completed

@@ -1,11 +1,6 @@
 import React from 'react';
 
-export default function Header({
-  handleSubmit,
-  value,
-  handleNewTodoKeyDown,
-  handleChange
-}) {
+export default function Header({ handleSubmit, value, handleChange }) {
   return (
     <header className="header">
       <h1>todos</h1>
