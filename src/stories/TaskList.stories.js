@@ -42,11 +42,7 @@ export const props = {
   toggleAll: action('toggleAll'),
   tasks: taskList,
   activeTodoCount: taskList.length,
-  onToggle: action('onToggle'),
-  onDelete: action('onDelete'),
-  onEdit: action('onEdit'),
-  onSave: action('onSave'),
-  onCancel: action('onCancel')
+  onTaskListUpdate: action('onTaskListUpdate')
 };
 
 storiesOf('TaskList', module)
