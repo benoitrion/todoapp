@@ -44,10 +44,7 @@ function App() {
   const [selected, setSelected] = useState(ALL);
 
   function handleChange(event) {
-    console.log('inside handleChange');
-    console.log(event);
     setValue(event.target.value);
-    console.log(value);
   }
 
   function handleSubmit(event) {
@@ -58,7 +55,6 @@ function App() {
       completed: false,
       editing: false
     };
-    console.log(newTodo);
     setTasks([newTodo].concat(tasks));
   }
 
@@ -81,7 +77,6 @@ function App() {
   }
 
   function onTaskListUpdate(tasks) {
-    console.log('onTaskListUpdate');
     setTasks(tasks);
   }
 
@@ -92,18 +87,17 @@ function App() {
         (selected === ACTIVE && !completed) ||
         selected === ALL
     );
-    console.log(filteredTasks);
     return filteredTasks;
   }
+
   const activeTodoCount = tasks.filter(t => !t.completed).length;
   const completedCount = tasks.length - activeTodoCount;
-  console.log(activeTodoCount);
   return (
     <section className="todoapp">
       <Header
-        value={value}
         handleSubmit={handleSubmit}
-        onChange={() => handleChange()}
+        value={value}
+        handleChange={handleChange}
       />
       <TaskList
         toggleAll={toggleAll}

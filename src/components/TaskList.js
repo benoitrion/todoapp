@@ -13,8 +13,8 @@ export default function TaskList({
   }
 
   function onDelete(id) {
-    tasks.filter(t => t.id !== id);
-    onTaskListUpdate(tasks);
+    const updatedTasks = tasks.filter(t => t.id !== id);
+    onTaskListUpdate(updatedTasks);
   }
 
   function onEdit(id) {
