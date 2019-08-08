@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 export default function Task({
   task: { id, title, completed, editing },
+  style,
   onToggle,
   onDelete,
   onEdit,
@@ -45,6 +46,7 @@ export default function Task({
 
   return (
     <li
+      style={style}
       className={classNames({
         completed: completed,
         editing: editing
@@ -56,6 +58,7 @@ export default function Task({
           type="checkbox"
           checked={completed}
           onClick={onToggle}
+          readOnly
         />
         <label onDoubleClick={handleEdit}>{title}</label>
         <button className="destroy" onClick={onDelete}></button>

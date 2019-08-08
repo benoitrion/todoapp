@@ -1,5 +1,6 @@
 import React from 'react';
 import Task from './Task.js';
+import { TransitionMotion, spring, presets } from 'react-motion';
 
 export default function TaskList({
   toggleAll,
@@ -38,6 +39,42 @@ export default function TaskList({
     onTaskListUpdate(tasks);
   }
 
+  function getDefaultStyles() {
+    return tasks.map(task => {
+      return {
+        task,
+        key: task.id,
+        style: { height: 0, opacity: 1 }
+      };
+    });
+  }
+
+  function getStyles() {
+    return tasks.map(task => {
+      return {
+        data: task,
+        key: task.id,
+        style: {
+          height: spring(60, presets.gentle),
+          opacity: spring(1, presets.gentle)
+        }
+      };
+    });
+  }
+
+  function willEnter() {
+    return {
+      height: 0,
+      opacity: 1
+    };
+  }
+
+  function willLeave() {
+    return {
+      height: spring(0),
+      opacity: spring(0)
+    };
+  }
   return (
     <section className="main">
       <input
@@ -48,21 +85,31 @@ export default function TaskList({
         checked={activeTodoCount === 0}
       />
       <label htmlFor="toggle-all" />
-      <ul className="todo-list">
-        {tasks.map(task => {
-          return (
-            <Task
-              key={task.id}
-              task={task}
-              onToggle={onToggle.bind(this, task.id)}
-              onDelete={onDelete.bind(this, task.id)}
-              onEdit={onEdit.bind(this, task.id)}
-              onSave={onSave.bind(this, task.id)}
-              onCancel={onCancel.bind(this, task.id)}
-            />
-          );
-        })}
-      </ul>
+      <TransitionMotion
+        defaultStyles={getDefaultStyles()}
+        styles={getStyles()}
+        willLeave={willLeave}
+        willEnter={willEnter}
+      >
+        {styles => (
+          <ul className="todo-list">
+            {styles.map(({ key, data, style }) => {
+              return (
+                <Task
+                  key={key}
+                  style={style}
+                  task={data}
+                  onToggle={onToggle.bind(this, data.id)}
+                  onDelete={onDelete.bind(this, data.id)}
+                  onEdit={onEdit.bind(this, data.id)}
+                  onSave={onSave.bind(this, data.id)}
+                  onCancel={onCancel.bind(this, data.id)}
+                />
+              );
+            })}
+          </ul>
+        )}
+      </TransitionMotion>
     </section>
   );
 }
