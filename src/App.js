@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header.js';
 import TaskList from './components/TaskList.js';
 import Footer from './components/Footer.js';
 import { ALL, ACTIVE, COMPLETED } from './constants';
+import uuidv4 from 'uuid/v4';
 
 function App() {
   const taskList = [
@@ -38,10 +39,16 @@ function App() {
     { id: 't10', title: 'Show Secret Demo', completed: false, editing: false },
     { id: 't11', title: 'Go home', completed: false, editing: false }
   ];
+  const TODOAPP = 'todoapp';
 
-  const [tasks, setTasks] = useState(taskList);
+  // const [tasks, setTasks] = useState(taskList);
+  const [tasks, setTasks] = useState(store(TODOAPP));
   const [value, setValue] = useState('');
   const [selected, setSelected] = useState(ALL);
+
+  useEffect(() => {
+    store(TODOAPP, tasks);
+  }, [tasks]);
 
   function handleChange(event) {
     setValue(event.target.value);
@@ -50,7 +57,7 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault();
     const newTodo = {
-      id: 't' + Date.now(),
+      id: uuidv4(),
       title: value.trim(),
       completed: false,
       editing: false
@@ -88,6 +95,14 @@ function App() {
         selected === ALL
     );
     return filteredTasks;
+  }
+
+  function store(namespace, data) {
+    if (data) {
+      return localStorage.setItem(namespace, JSON.stringify(data));
+    }
+    var store = localStorage.getItem(namespace);
+    return (store && JSON.parse(store)) || [];
   }
 
   const activeTodoCount = tasks.filter(t => !t.completed).length;
