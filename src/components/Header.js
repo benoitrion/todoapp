@@ -9,7 +9,7 @@ export default function Header({ handleSubmit, value, handleChange }) {
           autoFocus={true}
           className="new-todo"
           placeholder="What needs to be done?"
-          value={value}
+          defaultValue={value}
           onChange={handleChange}
         />
       </form>

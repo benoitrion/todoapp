@@ -31,7 +31,7 @@ export default function Task({
   function handleKeyDown(event) {
     if (event.which === ESCAPE_KEY) {
       setEditText(title);
-      onCancel(event);
+      onCancel();
     } else if (event.which === ENTER_KEY) {
       handleSubmit();
     }
@@ -54,7 +54,7 @@ export default function Task({
         <input
           className="toggle"
           type="checkbox"
-          defaultChecked={completed}
+          checked={completed}
           onClick={onToggle}
         />
         <label onDoubleClick={handleEdit}>{title}</label>

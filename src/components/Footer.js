@@ -4,9 +4,10 @@ import { ALL, ACTIVE, COMPLETED } from '../constants';
 
 export default function Footer({
   count,
-  showing,
+  selected,
   completedCount,
-  onClearCompleted
+  onClearCompleted,
+  handleSelect
 }) {
   function pluralize(count, word) {
     return count > 1 ? word + 's' : word;
@@ -27,22 +28,25 @@ export default function Footer({
       </span>
       <ul className="filters">
         <li>
-          <a href="#/" className={classNames({ selected: showing === ALL })}>
+          <a
+            className={classNames({ selected: selected === ALL })}
+            onClick={handleSelect.bind(null, ALL)}
+          >
             All
           </a>
         </li>{' '}
         <li>
           <a
-            href="#/activated"
-            className={classNames({ selected: showing === ACTIVE })}
+            className={classNames({ selected: selected === ACTIVE })}
+            onClick={handleSelect.bind(null, ACTIVE)}
           >
             Active
           </a>
         </li>{' '}
         <li>
           <a
-            href="#/completed"
-            className={classNames({ selected: showing === COMPLETED })}
+            className={classNames({ selected: selected === COMPLETED })}
+            onClick={handleSelect.bind(null, COMPLETED)}
           >
             Completed
           </a>

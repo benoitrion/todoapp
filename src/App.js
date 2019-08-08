@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header.js';
 import TaskList from './components/TaskList.js';
 import Footer from './components/Footer.js';
-import { ALL } from './constants';
+import { ALL, ACTIVE, COMPLETED } from './constants';
 
 function App() {
   const taskList = [
@@ -43,13 +43,14 @@ function App() {
   const [value, setValue] = useState('');
   const [selected, setSelected] = useState(ALL);
 
-  function handleChange({ target: { value } }) {
+  function handleChange(event) {
+    console.log('inside handleChange');
+    console.log(event);
+    setValue(event.target.value);
     console.log(value);
-    setValue(value);
   }
 
   function handleSubmit(event) {
-    console.log(event);
     event.preventDefault();
     const newTodo = {
       id: 't' + Date.now(),
@@ -57,37 +58,65 @@ function App() {
       completed: false,
       editing: false
     };
+    console.log(newTodo);
     setTasks([newTodo].concat(tasks));
   }
 
-  function toggleAll() {
-    setTasks(tasks.map(t => (t.completed = false)));
+  function toggleAll(event) {
+    const checked = event.target.checked;
+    setTasks(
+      tasks.map(t => {
+        t.completed = checked;
+        return t;
+      })
+    );
   }
 
-  function onClearCompleted() {}
+  function handleSelect(selected) {
+    setSelected(selected);
+  }
 
+  function onClearCompleted() {
+    setTasks(tasks.filter(t => !t.completed));
+  }
+
+  function onTaskListUpdate(tasks) {
+    console.log('onTaskListUpdate');
+    setTasks(tasks);
+  }
+
+  function filterTasks() {
+    const filteredTasks = tasks.filter(
+      ({ completed }) =>
+        (selected === COMPLETED && completed) ||
+        (selected === ACTIVE && !completed) ||
+        selected === ALL
+    );
+    console.log(filteredTasks);
+    return filteredTasks;
+  }
   const activeTodoCount = tasks.filter(t => !t.completed).length;
-  console.log(activeTodoCount);
   const completedCount = tasks.length - activeTodoCount;
-  console.log(completedCount);
-
+  console.log(activeTodoCount);
   return (
     <section className="todoapp">
       <Header
         value={value}
         handleSubmit={handleSubmit}
-        onChange={handleChange}
+        onChange={() => handleChange()}
       />
       <TaskList
         toggleAll={toggleAll}
         activeTodoCount={activeTodoCount}
-        tasks={tasks}
+        tasks={filterTasks()}
+        onTaskListUpdate={onTaskListUpdate}
       />
       <Footer
         count={activeTodoCount}
-        showing={selected}
+        selected={selected}
         completedCount={completedCount}
         onClearCompleted={onClearCompleted}
+        handleSelect={handleSelect}
       />
     </section>
   );

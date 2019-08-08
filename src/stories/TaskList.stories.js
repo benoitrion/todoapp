@@ -41,9 +41,14 @@ export const taskList = [
 export const props = {
   toggleAll: action('toggleAll'),
   tasks: taskList,
-  activeTodoCount: taskList.length
+  activeTodoCount: taskList.length,
+  onToggle: action('onToggle'),
+  onDelete: action('onDelete'),
+  onEdit: action('onEdit'),
+  onSave: action('onSave'),
+  onCancel: action('onCancel')
 };
 
 storiesOf('TaskList', module)
   .add('default', () => <TaskList {...props} />)
-  .add('empty', () => <TaskList tasks={[]} activeTodoCount={0} {...props} />);
+  .add('empty', () => <TaskList {...props} tasks={[]} activeTodoCount={0} />);

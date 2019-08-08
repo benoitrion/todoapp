@@ -7,14 +7,15 @@ import Footer from '../components/Footer';
 
 export const footer = {
   count: 2,
-  showing: ALL,
+  selected: ALL,
   completedCount: 1,
-  onClearCompleted: action('onClearCompleted')
+  onClearCompleted: action('onClearCompleted'),
+  handleSelect: action('handleSelect')
 };
 console.log(ALL);
 
 storiesOf('Footer', module)
   .add('default', () => <Footer {...footer} />)
   .add('empty', () => <Footer {...footer} count={0} completedCount={0} />)
-  .add('showingActive', () => <Footer {...footer} showing={ACTIVE} />)
-  .add('showingCompleted', () => <Footer {...footer} showing={COMPLETED} />);
+  .add('selectActive', () => <Footer {...footer} selected={ACTIVE} />)
+  .add('selectCompleted', () => <Footer {...footer} selected={COMPLETED} />);
