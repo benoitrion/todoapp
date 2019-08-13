@@ -29,6 +29,7 @@ export default function Footer({
       <ul className="filters">
         <li>
           <a
+            id="all-btn"
             href="#/"
             className={classNames({ selected: selected === ALL })}
             onClick={handleSelect.bind(null, ALL)}
@@ -38,6 +39,7 @@ export default function Footer({
         </li>{' '}
         <li>
           <a
+            id="active-btn"
             href="#/"
             className={classNames({ selected: selected === ACTIVE })}
             onClick={handleSelect.bind(null, ACTIVE)}
@@ -47,6 +49,7 @@ export default function Footer({
         </li>{' '}
         <li>
           <a
+            id="completed-btn"
             href="#/"
             className={classNames({ selected: selected === COMPLETED })}
             onClick={handleSelect.bind(null, COMPLETED)}

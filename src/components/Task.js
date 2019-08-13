@@ -30,10 +30,10 @@ export default function Task({
   }
 
   function handleKeyDown(event) {
-    if (event.which === ESCAPE_KEY) {
+    if (event.keyCode === ESCAPE_KEY) {
       setEditText(title);
       onCancel();
-    } else if (event.which === ENTER_KEY) {
+    } else if (event.keyCode === ENTER_KEY) {
       handleSubmit();
     }
   }
@@ -60,7 +60,9 @@ export default function Task({
           onClick={onToggle}
           readOnly
         />
-        <label onDoubleClick={handleEdit}>{title}</label>
+        <label id="label" onDoubleClick={handleEdit}>
+          {title}
+        </label>
         <button className="destroy" onClick={onDelete}></button>
       </div>
       <input

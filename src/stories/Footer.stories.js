@@ -12,7 +12,6 @@ export const footer = {
   onClearCompleted: action('onClearCompleted'),
   handleSelect: action('handleSelect')
 };
-console.log(ALL);
 
 storiesOf('Footer', module)
   .add('default', () => <Footer {...footer} />)

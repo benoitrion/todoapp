@@ -1,49 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header.js';
-import TaskList from './components/TaskList.js';
-import Footer from './components/Footer.js';
-import { ALL, ACTIVE, COMPLETED } from './constants';
-import uuidv4 from 'uuid/v4';
+import React, { useState, useEffect } from "react";
+import Header from "./Header.js";
+import TaskList from "./TaskList.js";
+import Footer from "./Footer.js";
+import { ALL, ACTIVE, COMPLETED } from "../constants";
+import uuidv4 from "uuid/v4";
 
-function App() {
-  const taskList = [
-    { id: 't1', title: 'Board the plane', completed: false, editing: false },
-    { id: 't2', title: 'Sleep', completed: false, editing: false },
-    {
-      id: 't3',
-      title: 'Try to finish conference slides',
-      completed: false,
-      editing: false
-    },
-    {
-      id: 't4',
-      title: 'Eat cheese and drink wine',
-      completed: false,
-      editing: false
-    },
-    { id: 't5', title: 'Go around in Uber', completed: false, editing: false },
-    {
-      id: 't6',
-      title: 'Talk with conf attendees',
-      completed: false,
-      editing: false
-    },
-    { id: 't7', title: 'Show Demo 1', completed: true, editing: false },
-    { id: 't8', title: 'Show Demo 2', completed: false, editing: false },
-    {
-      id: 't9',
-      title: 'Lament about the state of animation',
-      completed: false,
-      editing: false
-    },
-    { id: 't10', title: 'Show Secret Demo', completed: false, editing: false },
-    { id: 't11', title: 'Go home', completed: false, editing: false }
-  ];
-  const TODOAPP = 'todoapp';
-
-  // const [tasks, setTasks] = useState(taskList);
-  const [tasks, setTasks] = useState(store(TODOAPP));
-  const [value, setValue] = useState('');
+function App({ taskList }) {
+  const TODOAPP = "todoapp";
+  const [tasks, setTasks] = useState(store(TODOAPP, taskList));
+  const [value, setValue] = useState("");
   const [selected, setSelected] = useState(ALL);
 
   useEffect(() => {
@@ -99,9 +64,9 @@ function App() {
 
   function store(namespace, data) {
     if (data) {
-      return localStorage.setItem(namespace, JSON.stringify(data));
+      localStorage.setItem(namespace, JSON.stringify(data));
     }
-    var store = localStorage.getItem(namespace);
+    const store = localStorage.getItem(namespace);
     return (store && JSON.parse(store)) || [];
   }
 
