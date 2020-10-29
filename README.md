@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Redux TodoApp
+
+React and Redux learning practice based on TodoMvc App tutorial
+> [Juan Mendez - Creating Redux TodoMVC App]( https://medium.com/@juanmndz19/creating-redux-todomvc-app-using-es6-7-part-1-the-setup-80a74897d34d)
+
+Live demo available at
+> [Heroku - intense-scrubland-81152.herokuapp.com]( https://intense-scrubland-81152.herokuapp.com/)
 
 ## Available Scripts
 
